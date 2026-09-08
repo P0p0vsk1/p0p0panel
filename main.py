@@ -568,7 +568,6 @@ async def telegram_reporter():
                     f"🔗 Conns: {len(connections)}\n"
                     f"📦 Traffic: {round(stats['total_bytes']/(1024*1024),2)} MB\n"
                     f"📡 Requests: {stats['total_requests']}\n"
-                    f"❌ Errors: {stats['total_errors']}"
                 )
                 url = f"https://api.telegram.org/bot{token_row['value']}/sendMessage"
                 async with httpx.AsyncClient(timeout=10.0) as client:

@@ -1169,7 +1169,7 @@ async def create_link(request: Request, _=Depends(require_auth)):
         "uuid": uid, "label": label, "limit_bytes": limit_bytes, "used_bytes": 0,
         "max_connections": max_conn, "active": True, "created_at": now,
         "expires_at": expires_at, "color": color, "flag": flag, "fragment": fragment,
-        "vless_link": generate_vless_link(uid, remark=f"VadP-{label}", extra=extra),
+        "vless_link": generate_vless_link(uid, remark=f"💫 {label}", extra=extra),
     }
 
 @app.get("/api/links")
@@ -1204,7 +1204,7 @@ async def list_links(_=Depends(require_auth)):
             "flag": row.get("flag", ""),
             "fragment": row.get("fragment", ""),
             "current_connections": await count_connections_for_link(uid),
-            "vless_link": generate_vless_link(uid, remark=f"VadP-{row['label']}", extra=extra),
+            "vless_link": generate_vless_link(uid, remark=f"💫 {row['label']}", extra=extra),
         })
     return {"links": result}
 
@@ -1655,7 +1655,7 @@ def generate_subscription_content(link: dict, uid: str, addresses: list, extra: 
     server_node = generate_vless_link(uid, remark=f"{flag_emoji}Best Ping" if flag_emoji else "Best Ping", extra=extra)
     links = [status_node, server_node]
     for i, addr in enumerate(addresses):
-        links.append(generate_vless_link(uid, remark=f"{flag_emoji}VadP-{link['label']}-IP{i+1}" if flag_emoji else f"VadP-{link['label']}-IP{i+1}", address=addr, extra=extra))
+        links.append(generate_vless_link(uid, remark=f"{flag_emoji}💫 {link['label']}-IP{i+1}" if flag_emoji else f"💫 {link['label']}-IP{i+1}", address=addr, extra=extra))
     return "\n".join(links)
 
 def _fmt_bytes(b: int) -> str:
